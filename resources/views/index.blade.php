@@ -124,7 +124,7 @@
         <div class="row">
             <div class="col-sm-3">
               <div class="row ml-4">
-                <div class="card border-primary mb-3">
+                <div class="card border-primary mb-3" style="width: 18rem">
                   <div class="card-header">Pilih Berdasarkan</div>
                   <div class="card-body text-primary">
                     <form action="{{ route('search') }}" method="get">
