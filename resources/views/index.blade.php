@@ -10,7 +10,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     
     
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
@@ -156,9 +156,9 @@
               </div>
               <div class="row ml-4">
                 <div>
-                  Rentang Gradasi
+                  {{-- Rentang Gradasi
                   <div id="grad1">
-                  </div>
+                  </div> --}}
                   <section class="section" style="margin-bottom:15px"></section>
                   <div >
                     <table class="table table-dark" style="width: 18rem";>
@@ -190,9 +190,37 @@
                   </ul>
                 </div>
               </div>
-            </div>
 
-            
+              <div class="row ml-4 mt-3">
+                <div class="card">
+                  <div class="card-header">
+                    Gradient
+                  </div>
+                    <table class="table table-dark" style="width: 18rem";>
+                      <tbody>
+                        <tr>
+                          <td>Warna Awal</td>
+                          <td>
+                            <input type="color" value="#FFC4A3" id="awal">
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>Warna Akhir</td>
+                          <td>
+                            <input type="color" value="#E71414"  id="akhir">
+                          </td>
+                        </tr>
+                        <tr>
+                          <td></td>
+                          <td>
+                            <button class="btn btn-primary" style="width: 50px" id="btnGenerator"> Set </button>
+                          </td>
+                           </tr>
+                      </tbody>
+                    </table>
+                </div>
+              </div>
+            </div>
 
             <div class="col">
                 <div class="card border-primary mb-3 mt-4" >
@@ -221,8 +249,38 @@
         accessToken: 'pk.eyJ1IjoiaGFyaWtlc3VtYSIsImEiOiJjazZxMmNibnExcWluM2RvNzhndGx0YjRzIn0.cEyjePogDTkNTbiMnugU6Q'
         }).addTo(map);
  
-    var dataKabupatens = {!! json_encode($dataKabupatens) !!}   
+    var dataKabupatens = {!! json_encode($dataKabupatens) !!}  
+    setSebaran(dataKabupatens)
+    console.log(dataKabupatens)
+
+    $('#btnGenerator').on('click', function(e){
+      var colorStart = $('#awal').val();
+      var colorEnd = $('#akhir').val();
+      console.log(colorEnd)
+      console.log(colorStart)
+
+      $.ajax({
+            url: '/gradient',
+            type: "get",
+            data : {'start' : colorStart, 'end': colorEnd},
+            dataType: 'json',
+            success: function (msg, status, jqXHR) {
+              console.log(msg)
+              var i = 0;
+              $.each(dataKabupatens, function(key, value){
+                dataKabupatens[key][0].color = '#' + msg[i];
+                i++;
+              })
+              setSebaran(dataKabupatens)
+              console.log(dataKabupatens) 
+            },
+            error: function(msg, textStatus, errorThrown) {
+              console.log(textStatus);
+            }
+        });
+    })
     
+  
     if(dataKabupatens["WNA"] != undefined){
       $('#wna').html(dataKabupatens["WNA"][0].positif);
       console.log(dataKabupatens["WNA"][0].positif)
@@ -241,13 +299,13 @@
 
 
     // Instantiate KMZ parser (async)
-    var kmzParser = new L.KMZParser({
+    function setSebaran(dataKabupatens){
+      var kmzParser = new L.KMZParser({
             onKMZLoaded: function(layer, name) {
-            control.addOverlay(layer,name)
+            // control.addOverlay(layer,name)
             
 	      	  var layers = layer.getLayers()[0].getLayers();
 		      	layers.forEach(function(layer, index){
-
                     var kabupaten  = layer.feature.properties.NAME_2;
                     if(dataKabupatens[kabupaten] !== undefined){
                       console.log(dataKabupatens[kabupaten][0].kabupaten)
@@ -281,9 +339,12 @@
                 interactive: false, // Disable default "leaflet.js" mouse layer interactions.
                 pointable: true,    // Enable optimized "geojson-vt.js" mouse layer interactions.
             });
-    // Add remote KMZ files as layers (NB if they are 3rd-party servers, they MUST have CORS enabled)
-    kmzParser.load('/kmz/bali-kabupaten.kmz',{ interactive: true }); 
+            kmzParser.load('/kmz/bali-kabupaten.kmz',{ interactive: true }); 
     
+    }
+ 
+    // Add remote KMZ files as layers (NB if they are 3rd-party servers, they MUST have CORS enabled)
+
     
     const control = L.control
         .layers(null, null, { collapsed: false })

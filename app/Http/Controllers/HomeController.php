@@ -151,4 +151,45 @@ class HomeController extends Controller
 
         return view('index', ['total'=>$total, 'tanggal' => $tanggal,'dataKabupatens' => $dataKabupatens]);  
     }
+
+    
+    public function gradient(Request $request) {
+        $start = $request->start;
+        $end = $request->end;
+        $HexFrom = substr($start, 1);  
+        $HexTo = substr($end, 1);  
+        $ColorSteps = 10;
+
+        $FromRGB['r'] = hexdec(substr($HexFrom, 0, 2));
+        $FromRGB['g'] = hexdec(substr($HexFrom, 2, 2));
+        $FromRGB['b'] = hexdec(substr($HexFrom, 4, 2));
+      
+        $ToRGB['r'] = hexdec(substr($HexTo, 0, 2));
+        $ToRGB['g'] = hexdec(substr($HexTo, 2, 2));
+        $ToRGB['b'] = hexdec(substr($HexTo, 4, 2));
+      
+        $StepRGB['r'] = ($FromRGB['r'] - $ToRGB['r']) / ($ColorSteps - 1);
+        $StepRGB['g'] = ($FromRGB['g'] - $ToRGB['g']) / ($ColorSteps - 1);
+        $StepRGB['b'] = ($FromRGB['b'] - $ToRGB['b']) / ($ColorSteps - 1);
+      
+        $GradientColors = array();
+      
+        for($i = 0; $i <= $ColorSteps; $i++) {
+          $RGB['r'] = floor($FromRGB['r'] - ($StepRGB['r'] * $i));
+          $RGB['g'] = floor($FromRGB['g'] - ($StepRGB['g'] * $i));
+          $RGB['b'] = floor($FromRGB['b'] - ($StepRGB['b'] * $i));
+      
+          $HexRGB['r'] = sprintf('%02x', ($RGB['r']));
+          $HexRGB['g'] = sprintf('%02x', ($RGB['g']));
+          $HexRGB['b'] = sprintf('%02x', ($RGB['b']));
+      
+          $GradientColors[] = implode(NULL, $HexRGB);
+        }
+        $GradientColors = array_filter($GradientColors, array($this,"leng"));
+        return response ()->json($GradientColors);
+      }
+      
+      public function leng ($val){
+        return (strlen($val) == 6 ? true : false );
+      }
 }

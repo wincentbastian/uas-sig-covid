@@ -140,4 +140,5 @@ class PasienController extends Controller
         $pasien = Pasien::where('id',$id)->delete();
         return redirect('admin/pasien');
     }
+
 }

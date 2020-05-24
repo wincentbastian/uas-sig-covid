@@ -15,10 +15,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'HomeController@index');
 Route::get('/search', 'HomeController@search')->name('search');
-
+Route::get('/gradient', 'HomeController@gradient');
 Route::resource('/admin/pasien','PasienController');
 
 Route::prefix('admin')->group(function () {
+  
     Route::get('/pasien', 'PasienController@index')->name('pasien');
     Route::post('/pasien', 'PasienController@store')->name('pasien-store');
     Route::get('/pasien/{tanggal}', 'PasienController@show')->name('pasien-show');
