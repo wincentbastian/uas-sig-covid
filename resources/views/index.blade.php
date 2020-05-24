@@ -30,7 +30,7 @@
       #grad1 {
         height: 40px;
         width: 290px;
-        background-image: linear-gradient(to right,#E56500, #E55D06, #E5560C, #E54E12, #E54718, #E5401E,#E53824,#E5312A, #E52A30); /* Standard syntax (must be last) */
+        background-image: linear-gradient(to right,#FFC4A3, #FCAE91,#F9987F, #F6826D, #F36C5B, #F05649, #ED4037, #EA2A25, #E71414   ); /* Standard syntax (must be last) */
       }
       </style>
 </head>
