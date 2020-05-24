@@ -23,7 +23,7 @@ class HomeController extends Controller
         
         $gradientColor = ['#E5A700','#E39A01','#E5A700','#E39A01','#E28D02','#E18103','#E07405','#DE6706','#DD5B07','#DC4E08','#DB420A'];
         
-        $gradientColor = ['#E56500', '#E55D06','#E56500', '#E55D06', '#E5560C', '#E54E12', '#E54718', '#E5401E', '#E53824', '#E5312A', '#E52A30'];
+        $gradientColor = ['#FFC4A3', '#FCAE91','#FFC4A3', '#FCAE91','#F9987F', '#F6826D', '#F36C5B', '#F05649', '#ED4037', '#EA2A25', '#E71414'];
        
         foreach($dataKabupaten as $key=>$p){
             if($p->kabupaten != "WNA" && $p->kabupaten != "Kabupaten lain" ){
@@ -128,7 +128,7 @@ class HomeController extends Controller
         GROUP BY kabupaten ORDER BY positif ASC");
         
         $gradientColor = ['#E56500', '#E55D06','#E56500', '#E55D06', '#E5560C', '#E54E12', '#E54718', '#E5401E', '#E53824', '#E5312A', '#E52A30'];
-         
+        $gradientColor = ['#FFC4A3', '#FCAE91','#FFC4A3', '#FCAE91','#F9987F', '#F6826D', '#F36C5B', '#F05649', '#ED4037', '#EA2A25', '#E71414'];
         foreach($dataKabupaten as $key=>$p){
             if($p->kabupaten != "WNA" && $p->kabupaten != "Kabupaten lain" ){
                 $p->color = $gradientColor[$key];

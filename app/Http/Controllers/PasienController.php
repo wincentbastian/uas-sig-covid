@@ -17,7 +17,7 @@ class PasienController extends Controller
      */
     public function index()
     {
-        $pasiens = Pasien::orderBy('id','DESC')->paginate(10);
+        $pasiens = Pasien::orderBy('id','DESC')->paginate(11);
         $kabupatens = Kabupaten::get();
         return view('admin/pasien-view',['pasiens'=>$pasiens,'kabupatens'=>$kabupatens]);
     }

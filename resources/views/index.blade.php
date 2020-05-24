@@ -225,6 +225,7 @@
     
     if(dataKabupatens["WNA"] != undefined){
       $('#wna').html(dataKabupatens["WNA"][0].positif);
+      console.log(dataKabupatens["WNA"][0].positif)
     }
     else{
       $('#wna').html(0);
@@ -232,10 +233,12 @@
 
     if(dataKabupatens["Kabupaten lain"] != undefined){
       $('#lain').html(dataKabupatens["Kabupaten lain"][0].positif);
-  }
-  else{
-      $('#lain').html(0);
+      console.log(dataKabupatens["Kabupaten lain"][0].positif)
     }
+    else{
+        $('#lain').html(0);
+    }
+
 
     // Instantiate KMZ parser (async)
     var kmzParser = new L.KMZParser({
