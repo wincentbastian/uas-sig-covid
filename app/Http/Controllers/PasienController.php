@@ -87,6 +87,10 @@ class PasienController extends Controller
                                 ->where('tb_pasien.tanggal', $tanggal)
                                 ->orderBy('id', 'DESC')
                                 ->get();
+                foreach($pasiens as $key=>$p){
+                    $p->copy_data = "sukses"; 
+                }
+                
                 return response()->json($pasiens);
             }
             return response()->json($pasiens);

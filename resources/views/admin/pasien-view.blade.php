@@ -272,21 +272,21 @@
                       $('#data').empty()
                       var data = "";
 
-                      const _MS_PER_DAY = 1000 * 60 * 60 * 24;
-                      // a and b are javascript Date objects
-                      function dateDiffInDays(a, b) {
-                        // Discard the time and time-zone information.
-                        const utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
-                        const utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
-                        return Math.floor((utc2 - utc1) / _MS_PER_DAY);
-                      }
+                      // const _MS_PER_DAY = 1000 * 60 * 60 * 24;
+                      // // a and b are javascript Date objects
+                      // function dateDiffInDays(a, b) {
+                      //   // Discard the time and time-zone information.
+                      //   const utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
+                      //   const utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
+                      //   return Math.floor((utc2 - utc1) / _MS_PER_DAY);
+                      // }
 
-                        const a = new Date(),
-                        b = new Date(msg[0].tanggal),
-                        difference = dateDiffInDays(a, b);
-                        console.log(difference)// test it
+                      //   const a = new Date(),
+                      //   b = new Date(msg[0].tanggal),
+                      //   difference = dateDiffInDays(a, b);
+                      //   console.log(difference)// test it
                       
-                      if(difference == 1){
+                      if(msg[0].copy_data){
                         alert("Sukses mengcopy data H-1 ke H")
                       }
 
