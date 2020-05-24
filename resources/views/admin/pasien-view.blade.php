@@ -3,7 +3,7 @@
 @section('title', 'Manajemen Data Pasien')
 
 @section('content')
-
+  Sistem akan otomatis mengcopy data h-1 ke tanggal terpilih, jika tanggal terpilih belum ada data <br>
   <input id="datepicker" type="date" width="276"  max=
   <?php
      echo date('Y-m-d', strtotime(' +1 day'))
