@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/test', function(){
+    return view('test');
+});
+
 Route::get('/', 'HomeController@index');
 Route::get('/search', 'HomeController@search')->name('search');
 Route::get('/gradient', 'HomeController@gradient');
