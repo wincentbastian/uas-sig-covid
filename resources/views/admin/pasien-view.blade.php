@@ -257,6 +257,7 @@
   <script>
     $(document).ready(function(){
 
+
      var pag =  $(".paginate").html
      
       $("#datepicker").change(function() {

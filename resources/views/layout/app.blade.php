@@ -65,14 +65,14 @@
     
     @media screen and (max-width: 34em) {
       .row-offcanvas-left .sidebar-offcanvas {
-        left: -45%;
+        left: -25%;
       }
       .row-offcanvas-left.active {
         left: 45%;
         margin-left: -6px;
       }
       .sidebar-offcanvas {
-        width: 45%;
+        width: 35%;
       }
     }
     
@@ -125,13 +125,14 @@
   </nav>
   <div class="container-fluid" id="main">
     <div class="row row-offcanvas row-offcanvas-left">
-      <div class="col-md-3 col-lg-2 sidebar-offcanvas" id="sidebar" role="navigation">
+      <div class="col-md-2 sidebar-offcanvas" id="sidebar" role="navigation">
         <ul class="nav flex-column pl-1">
           <li class="nav-item">
             <a class="nav-link" href="#submenu1" data-toggle="collapse" data-target="#submenu1">Manajemen Data▾</a>
             <ul class="list-unstyled flex-column pl-3 collapse" id="submenu1" aria-expanded="false">
               <li class="nav-item"><a class="nav-link" href="{{route('pasien')}}">Pasien</a></li>
-              <li class="nav-item"><a class="nav-link" href="{{route('kabupaten')}}">Kabupaten</a></li>
+              <li class="nav-item"><a class="nav-link" href="{{route('pasien-per-kelurahan')}}">Pasien Per Kelurahan</a></li>
+              {{-- <li class="nav-item"><a class="nav-link" href="{{route('kabupaten')}}">Kabupaten</a></li> --}}
             </ul>
           </li>
         </ul>

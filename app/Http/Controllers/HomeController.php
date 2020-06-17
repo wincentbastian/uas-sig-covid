@@ -43,10 +43,6 @@ class HomeController extends Controller
         }
 
         $tanggal = date('d F Y');
-        
-
-        
-        
  
         return view('index', ['total'=>$total,'tanggal' => $tanggal, 'dataKabupatens' => $dataKabupatens]); 
     }
