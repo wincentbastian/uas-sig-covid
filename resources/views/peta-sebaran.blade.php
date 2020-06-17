@@ -50,8 +50,8 @@
     <section class="section" style="margin-top:25px"></section>
     <div class="row">
         <div class="col-sm-3">
-          <div class="row ml-4">
-            <div class="card border-primary mb-3" style="width: 18rem">
+          <div class="row ml-2">
+            <div class="card border-primary" style="width: 21rem">
               <div class="card-header">Pilih Berdasarkan</div>
               <div class="card-body text-primary">
                 <form action="{{ route('peta-search') }}" method="get">
@@ -81,8 +81,8 @@
               </div>
             </div>
           </div>
-          <div class="row ml-4 mt-5">
-            <div class="card" style="width: 18rem;">
+          <div class="row ml-2 mt-4 mb-4">
+            <div class="card" style="width: 21rem;">
               <div class="card-header">
                 Total Positif
               </div>
