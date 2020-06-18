@@ -31,7 +31,7 @@
   <div class="pos-f-t">
     <div class="collapse" id="navbarToggleExternalContent">
       <div class="bg-dark p-4">
-        <a href="/admin/pasien"><h4 class="text-white">Kelola Data</h4></a>
+        <a href="/admin/pasien-per-kelurahan"><h4 class="text-white">Kelola Data</h4></a>
       </div>
     </div>
     <nav class="navbar navbar-dark bg-dark">

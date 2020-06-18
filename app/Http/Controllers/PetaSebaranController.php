@@ -29,16 +29,19 @@ class PetaSebaranController extends Controller
             elseif($pasien->total_positif > 0 && $pasien->perawatan == 0 ){
                 $pasien->color = '#64991E'; 
             }
-            elseif($pasien->ppln == 1 || $pasien->ppdn == 1  && $pasien->perawatan > 0){
-                $pasien->color = '#E6E708'; 
-            }
             elseif($pasien->tl >= 1  && $pasien->perawatan > 0){
                 $pasien->color = '#920218'; 
             }
-            
+
             elseif($pasien->ppln > 1 || $pasien->ppdn > 1  && $pasien->perawatan > 0){
                 $pasien->color = '#E2556B'; 
             }
+            
+            elseif($pasien->ppln == 1 || $pasien->ppdn == 1  && $pasien->perawatan > 0){
+                $pasien->color = '#E6E708'; 
+            }
+           
+        
             
         }
 
