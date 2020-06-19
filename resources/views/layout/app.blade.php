@@ -100,45 +100,67 @@
       -ms-transform: rotate(-44deg);
       transform: rotate(-44deg);
     }
+
+    .sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
+}
   </style>
 
 </head>
 
 <body>
-  <nav class="navbar navbar-fixed-top navbar-toggleable-sm navbar-inverse bg-primary mb-3">
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="flex-row d-flex">
-      <a class="navbar-brand mb-1" href="#">Admin</a>
-      <button type="button" class="hidden-md-up navbar-toggler" data-toggle="offcanvas" title="Toggle responsive left sidebar">
-            <span class="navbar-toggler-icon"></span>
-      </button>
-    </div>
-    <div class="navbar-collapse collapse" id="collapsingNavbar">
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="/">Halaman Awal</a>
-        </li>
-      </ul>
-    </div>
-  </nav>
   <div class="container-fluid" id="main">
     <div class="row row-offcanvas row-offcanvas-left">
+    <div id="mySidenav" class="sidenav">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <form action="/" method="get">
+  <button type="submit" style="margin-top: 40px; text-size: 12px;"class="btn btn-primary">Beranda</button>
+  </form>
+  <button type="button" style="margin-top: 40px; text-size: 12px;"class="btn btn-primary" data-toggle="modal" data-target="#modal">Tambah Data Baru</button>
+</div>
       <div class="col-md-2 sidebar-offcanvas" id="sidebar" role="navigation">
         <ul class="nav flex-column pl-1">
-          <li class="nav-item">
-            <a class="nav-link" href="#submenu1" data-toggle="collapse" data-target="#submenu1">Manajemen Data▾</a>
-            <ul class="list-unstyled flex-column pl-3 collapse" id="submenu1" aria-expanded="false">
-              <li class="nav-item"><a class="nav-link" href="{{route('pasien')}}">Pasien</a></li>
-              <li class="nav-item"><a class="nav-link" href="{{route('pasien-per-kelurahan')}}">Pasien Per Kelurahan</a></li>
-              {{-- <li class="nav-item"><a class="nav-link" href="{{route('kabupaten')}}">Kabupaten</a></li> --}}
-            </ul>
-          </li>
+          <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Side Navbar</span>
+        
         </ul>
       </div>
       <!--/col-->
-
+      
       <div class="col-md-9 col-lg-10 main">
         @yield('content')
       </div>
@@ -215,6 +237,17 @@
       false
     );
   </script>
+
+<script>
+function openNav() {
+  document.getElementById("mySidenav").style.width = "250px";
+}
+
+function closeNav() {
+  document.getElementById("mySidenav").style.width = "0";
+}
+</script>
+   
 
   <!--scripts loaded here-->
 

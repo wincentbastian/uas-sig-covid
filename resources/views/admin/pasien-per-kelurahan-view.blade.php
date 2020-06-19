@@ -21,16 +21,16 @@
         {{ Session::get('flash_message_store') }}
     </div>
 @endif
-
-  Sistem akan otomatis mengcopy data h-1 ke tanggal terpilih, jika tanggal terpilih belum ada data <br>
+<div style="margin-top: 30px;">
   <input id="datepicker" type="date" width="276"  max=
   <?php
      echo date('Y-m-d', strtotime(' +1 day'))
   ?>>
+  </div>
 
 
 <section class="section" style="margin-bottom:25px"></section>
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#create">Create</button>
+
 <section class="section" style="margin-bottom:25px"></section>
 
 
@@ -94,11 +94,11 @@
 </table>
 
   <!-- Modal -->
-  <div class="modal fade" id="create" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Create New Data</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Data Baru</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>

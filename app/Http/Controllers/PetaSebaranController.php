@@ -16,13 +16,13 @@ class PetaSebaranController extends Controller
      */
     public function index()
     {
-        $tanggal = date("Y-m-d");
-        $pasiens = DB::select("SELECT *, SUM(ppln+ppdn+tl+lainya) AS 'total_positif', 
+        $date = date("Y-m-d");
+        $patients = DB::select("SELECT *, SUM(ppln+ppdn+tl+lainya) AS 'total_positif', 
                                 SUM(perawatan+sembuh+meninggal) AS 'total_kondisi' 
-                                FROM tb_positif WHERE tanggal = '$tanggal' GROUP BY id");
+                                FROM tb_positif WHERE tanggal = '$date' GROUP BY id");
         
 
-        foreach($pasiens as $pasien){
+        foreach($patients as $pasien){
             if($pasien->total_positif == 0){
                 $pasien->color = '#95FF0A';
             }
@@ -37,7 +37,7 @@ class PetaSebaranController extends Controller
                 $pasien->color = '#E2556B'; 
             }
             
-            elseif($pasien->ppln == 1 || $pasien->ppdn == 1  && $pasien->perawatan > 0){
+            else{
                 $pasien->color = '#E6E708'; 
             }
            
@@ -45,22 +45,22 @@ class PetaSebaranController extends Controller
             
         }
 
-        $dataKelurahans = array();
+        $dataKelurahan = array();
 
-        foreach($pasiens as $p){
-            $dataKelurahans[$p->kelurahan][] = $p;
+        foreach($patients as $p){
+            $dataKelurahan[$p->kelurahan][] = $p;
         }
 
-        $totals = DB::select("SELECT SUM(ppln+ppdn+tl+lainya) as total from tb_positif WHERE tanggal = '$tanggal'");
+        $total = DB::select("SELECT SUM(ppln+ppdn+tl+lainya) as total from tb_positif WHERE tanggal = '$date'");
         
-        $positif = 0;
-        foreach($totals as $total){
-            $positif = $total->total;
+        $positive = 0;
+        foreach($total as $p){
+            $positive = $p->total;
         }
 
-        $tanggal = date('d F Y', strtotime($tanggal));
+        $date = date('d F Y', strtotime($date));
 
-        return view('peta-sebaran',['dataKelurahans'=> $dataKelurahans,'total'=>$positif,'tanggal' => $tanggal]);
+        return view('peta-sebaran',['dataKelurahan'=> $dataKelurahan,'total'=>$positive,'date' => $date]);
     }
 
     /**
@@ -131,10 +131,10 @@ class PetaSebaranController extends Controller
 
     public function search(Request $request)
     {
-        $tanggal = $request->tanggal;
+        $date = $request->date;
         $pasiens = DB::select("SELECT *, SUM(ppln+ppdn+tl+lainya) AS 'total_positif', 
                                 SUM(perawatan+sembuh+meninggal) AS 'total_kondisi' 
-                                FROM tb_positif WHERE tanggal = '$tanggal' GROUP BY id");
+                                FROM tb_positif WHERE tanggal = '$date' GROUP BY id");
         
 
         foreach($pasiens as $pasien){
@@ -161,16 +161,16 @@ class PetaSebaranController extends Controller
             $dataKelurahans[$p->kelurahan][] = $p;
         }
 
-        $totals = DB::select("SELECT SUM(ppln+ppdn+tl+lainya) as total from tb_positif WHERE tanggal = '$tanggal'");
+        $totals = DB::select("SELECT SUM(ppln+ppdn+tl+lainya) as total from tb_positif WHERE tanggal = '$date'");
         
         $positif = 0;
         foreach($totals as $total){
             $positif = $total->total;
         }
 
-         $tanggal = date('d F Y', strtotime($tanggal));
+         $tanggal = date('d F Y', strtotime($date));
 
-        return view('peta-sebaran',['dataKelurahans'=> $dataKelurahans,'total'=>$positif,'tanggal' => $tanggal]);
+        return view('peta-sebaran',['dataKelurahan'=> $dataKelurahans,'total'=>$positif,'date' => $tanggal]);
 
     }
 

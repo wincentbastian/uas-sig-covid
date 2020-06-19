@@ -13,10 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/peta-sebaran', 'PetaSebaranController@index');
-Route::get('/peta-sebaran/search', 'PetaSebaranController@search')->name('peta-search');
+Route::get('/', 'PetaSebaranController@index');
+Route::POST('/search', 'PetaSebaranController@search')->name('peta-search');
 
-Route::get('/', 'HomeController@index');
+Route::get('/tes', 'HomeController@index');
 Route::get('/search', 'HomeController@search')->name('search');
 Route::get('/gradient', 'HomeController@gradient');
 Route::resource('/admin/pasien','PasienController');
